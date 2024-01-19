@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Анимации</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        transition: background-color 0.5s ease; /* Анимация изменения цвета фона */
+      }
+
+      #animated-element {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.3s ease; /* Анимация масштабирования элемента */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="animated-element" onclick="toggleAnimations()"></div>
+
+    <script>
+      let isAnimating = false;
+
+      function toggleAnimations() {
+        const body = document.body;
+        const element = document.getElementById("animated-element");
+
+        isAnimating = !isAnimating;
+
+        if (isAnimating) {
+          // Изменение цвета фона при клике
+          body.style.backgroundColor = "#2ecc71";
+
+          // Масштабирование элемента при клике
+          element.style.transform = "scale(1.5)";
+        } else {
+          // Возвращение к изначальному цвету фона
+          body.style.backgroundColor = "#f0f0f0";
+
+          // Возвращение к изначальному масштабу элемента
+          element.style.transform = "scale(1)";
+        }
+      }
+    </script>
+  </body>
+</html>

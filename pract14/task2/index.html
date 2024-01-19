@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #gallery {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .thumbnail {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      #mainImage {
+        max-width: 400px;
+        max-height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gallery">
+      <img
+        src="basketball.jpg"
+        alt="Image 1"
+        class="thumbnail"
+        onclick="changeImage('basketball.jpg')"
+      />
+      <img
+        src="box.jpg"
+        alt="Image 2"
+        class="thumbnail"
+        onclick="changeImage('box.jpg')"
+      />
+      <img
+        src="gymnastic.jpg"
+        alt="Image 3"
+        class="thumbnail"
+        onclick="changeImage('gymnastic.jpg')"
+      />
+    </div>
+
+    <img src="basketball.jpg" alt="Main Image" id="mainImage" />
+
+    <script>
+      function changeImage(imageSrc) {
+        document.getElementById("mainImage").src = imageSrc;
+      }
+    </script>
+  </body>
+</html>

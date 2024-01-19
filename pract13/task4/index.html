@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Content Update on Scroll</title>
+    <style>
+      body {
+        margin: 0;
+        height: 110vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <p>Нужно покрутить вниз</p>
+    </div>
+
+    <script>
+      function handleScroll() {
+        var scrollPosition = window.scrollY;
+
+        var endOfPage = document.body.offsetHeight - window.innerHeight - 200;
+
+        if (scrollPosition > endOfPage) {
+          var newContent = document.createElement("div");
+          newContent.style.backgroundColor = "red";
+          newContent.textContent = "Я появляюсь про скроле";
+          document.querySelector(".content").appendChild(newContent);
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll);
+    </script>
+  </body>
+</html>

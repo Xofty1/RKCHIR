@@ -1,0 +1,12 @@
+body > div {
+  display: flex;
+  justify-content: center;
+}
+#card {
+  padding: 20px;
+  height: 600px;
+  width: 200px;
+  background-color: aquamarine;
+  border-radius: 20px;
+  justify-content: center;
+}

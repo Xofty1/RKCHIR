@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #products-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .product {
+        width: 100px;
+        height: 100px;
+        background-color: #4c7faf;
+        color: white;
+        text-align: center;
+        line-height: 100px;
+        cursor: grab;
+      }
+      .c {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+      }
+
+      #cart {
+        height: 150px;
+        width: inherit;
+        background-color: #2196f3;
+        color: white;
+        text-align: center;
+        line-height: 150px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="c">
+      <div id="cart" ondrop="drop(event)" ondragover="allowDrop(event)">
+        Cart: $0
+      </div>
+    </div>
+    <div id="products-container">
+      <div class="product" draggable="true" ondragstart="startDragging(event)">
+        $10
+      </div>
+      <div class="product" draggable="true" ondragstart="startDragging(event)">
+        $20
+      </div>
+      <div class="product" draggable="true" ondragstart="startDragging(event)">
+        $30
+      </div>
+      <div class="product" draggable="true" ondragstart="startDragging(event)">
+        $50
+      </div>
+    </div>
+
+    <script>
+      let draggedProduct = null;
+
+      function startDragging(event) {
+        draggedProduct = event.target;
+      }
+
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+
+      function drop(event) {
+        event.preventDefault();
+        const cart = document.getElementById("cart");
+
+        if (draggedProduct) {
+          const productPrice = parseInt(
+            draggedProduct.textContent.replace("$", "")
+          );
+
+          // Создаем новый элемент для корзины с ценой товара
+          const cartItem = document.createElement("div");
+          cartItem.textContent = `$${productPrice}`;
+          cartItem.style.position = "absolute";
+          cartItem.style.top = "50%";
+          cartItem.style.left = "50%";
+          cartItem.style.transform = "translate(-50%, -50%)";
+
+          // Добавляем элемент в корзину
+          cart.appendChild(cartItem);
+
+          // Обновляем итоговую стоимость
+          const currentTotal = parseInt(
+            cart.textContent.replace("Cart: $", "")
+          );
+          const newTotal = currentTotal + productPrice;
+          cart.textContent = `Cart: $${newTotal}`;
+        }
+      }
+    </script>
+  </body>
+</html>

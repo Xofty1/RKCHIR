@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Центрирование изображения и отслеживание кликов</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #centered-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #centered-image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="centered-container">
+      <img id="centered-image" src="2012.png" alt="Centered Image" />
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var centeredContainer = document.getElementById("centered-container");
+        var centeredImage = document.getElementById("centered-image");
+
+        centerImage();
+
+        window.addEventListener("resize", centerImage);
+
+        document.addEventListener("click", function (event) {
+          var clickedX = event.clientX;
+          var clickedY = event.clientY;
+
+          console.log("Clicked at: X=" + clickedX + ", Y=" + clickedY);
+        });
+
+        function centerImage() {
+          var containerWidth = centeredContainer.clientWidth;
+          var containerHeight = centeredContainer.clientHeight;
+
+          var imageWidth = centeredImage.width;
+          var imageHeight = centeredImage.height;
+
+          var offsetX = (containerWidth - imageWidth) / 2;
+          var offsetY = (containerHeight - imageHeight) / 2;
+
+          centeredImage.style.transform =
+            "translate(" + offsetX + "px, " + offsetY + "px)";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #slider-container {
+        width: 80%;
+        margin: auto;
+        position: relative;
+      }
+
+      #slider-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #ddd;
+        position: relative;
+        cursor: pointer;
+      }
+
+      #slider-thumb {
+        width: 20px;
+        height: 20px;
+        background-color: #4caf50;
+        position: absolute;
+        top: -5px;
+        cursor: grab;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slider-container">
+      <div
+        id="slider-bar"
+        onclick="moveSlider(event)"
+        onmousedown="startDragging(event)"
+      >
+        <div
+          id="slider-thumb"
+          draggable="true"
+          ondragstart="startDragging(event)"
+          ondragend="stopDragging()"
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      let isDragging = false;
+
+      function startDragging(event) {
+        isDragging = true;
+        event.target.style.cursor = "grabbing";
+      }
+
+      function stopDragging() {
+        isDragging = false;
+        document.getElementById("slider-thumb").style.cursor = "grab";
+      }
+
+      function moveSlider(event) {
+        if (isDragging) {
+          const sliderBar = document.getElementById("slider-bar");
+          const sliderThumb = document.getElementById("slider-thumb");
+          const barRect = sliderBar.getBoundingClientRect();
+
+          const newPosition =
+            ((event.clientX - barRect.left) / barRect.width) * 100;
+
+          const newPositionLimited = Math.max(0, Math.min(newPosition, 100));
+
+          sliderThumb.style.left = newPositionLimited + "%";
+        }
+      }
+
+      document.addEventListener("mousemove", function (event) {
+        moveSlider(event);
+      });
+
+      document.addEventListener("mouseup", function () {
+        stopDragging();
+      });
+    </script>
+  </body>
+</html>

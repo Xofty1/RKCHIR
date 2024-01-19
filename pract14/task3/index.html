@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        cursor: pointer;
+        padding: 8px;
+        user-select: none;
+      }
+
+      .selected {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="myList">
+      <li onclick="toggleSelection(event)">Один</li>
+      <li onclick="toggleSelection(event)">Два</li>
+      <li onclick="toggleSelection(event)">Три</li>
+      <!-- Добавьте другие элементы списка по необходимости -->
+    </ul>
+
+    <script>
+      function toggleSelection(event) {
+        const listItem = event.currentTarget;
+
+        // Проверка, была ли зажата клавиша Ctrl (или Cmd для Mac) в момент клика
+        const isCtrlPressed = event.ctrlKey || event.metaKey;
+
+        // Если Ctrl не зажат, сначала снимаем выделение со всех элементов списка
+        if (!isCtrlPressed) {
+          const list = document.getElementById("myList");
+          const listItems = list.getElementsByTagName("li");
+          for (const item of listItems) {
+            item.classList.remove("selected");
+          }
+        }
+
+        // Выделяем/снимаем выделение для текущего элемента списка
+        listItem.classList.toggle("selected");
+      }
+    </script>
+  </body>
+</html>

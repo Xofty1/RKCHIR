@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question Before Leaving</title>
+    <style>
+      #contents {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <!-- Динамически загруженное содержимое -->
+      <p>
+        Вы можете перецти на мой сайт
+        <a href="https://xofty1.github.io/olympic-games/main.html"
+          >Олимпийские игры</a
+        >.
+      </p>
+    </div>
+
+    <script>
+      document
+        .getElementById("contents")
+        .addEventListener("click", function (event) {
+          var targetElement = event.target;
+
+          // Проверяем, является ли кликнутый элемент ссылкой или находится внутри ссылки
+          while (targetElement && targetElement !== this) {
+            if (targetElement.tagName === "A") {
+              // При клике на ссылку выводим вопрос перед покиданием страницы
+              window.addEventListener("beforeunload", function (e) {
+                var confirmationMessage =
+                  "Вы уверены, что хотите покинуть страницу?";
+                e.returnValue = confirmationMessage;
+                return confirmationMessage;
+              });
+
+              break; // Прерываем цикл, чтобы избежать добавления нескольких обработчиков для одной ссылки
+            }
+            targetElement = targetElement.parentNode;
+          }
+        });
+    </script>
+  </body>
+</html>
